@@ -9,7 +9,7 @@ echo ""
 # extract game
 sudo mkdir -p $GAME_PATH
 cd /home/$USER/tibia-770-setup
-sudo tar -xvzf resources/tibia-game.tar.gz -C $GAME_PATH
+sudo tar -xvzf resources/tibia-game.tar.gz -C /home
 sudo cp $GAME_PATH/bin/game $GAME_PATH/bin/game.original
 sudo cp $GAME_PATH/.tibia $GAME_PATH/.tibia.original
 
