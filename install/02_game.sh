@@ -6,6 +6,8 @@ echo "Preparing game..."
 echo "---------------------------------------------------------------------------------------------"
 echo ""
 
+GAME_PATH="/home/game"
+
 # extract game
 sudo mkdir -p $GAME_PATH
 cd /home/$USER/tibia-770-setup
@@ -32,7 +34,7 @@ sudo sed -i 'sXBASE="/game"XBASE="/home/game"Xg' $GAME_PATH/bin/reboot-daily
 tar -xvzf resources/dennis-libraries.tar.gz -C resources
 sudo chmod 777 resources/dennis-libraries/*
 sudo mv resources/dennis-libraries/* /lib
-sudo chown -R $USER $GAME_PATH
+sudo chown -R $USER /home/game
 
 # clean up
 rm $GAME_PATH/save/game.pid
