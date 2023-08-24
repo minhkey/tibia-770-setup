@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# restore original files first, so we start fresh
+cp -r /home/game/mon /home/game/mon.prev
+rm -rf /home/game/mon
+cp -r /home/game/mon.original /home/game/mon
+
 read -e -p "Select experience rate: " EXP_RATE
 read -e -p "Select loot amount rate: " AMOUNT_RATE
 read -e -p "Select loot chance rate: " CHANCE_RATE
