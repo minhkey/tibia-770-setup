@@ -31,7 +31,7 @@ for FILE in *mon; do
     if [ -s tmp.txt ]; then
 
         # replace loot data using R
-        Rscript --vanilla /home/$USER/tibia_770_setup/admin/change_loot.R $AMOUNT_RATE $CHANCE_RATE
+        Rscript --vanilla /home/$USER/tibia-770-setup/admin/change_loot.R $AMOUNT_RATE $CHANCE_RATE
         
         # does outfile.txt exist (i.e., did the R script work)?
         if [ -e outfile.txt ]; then

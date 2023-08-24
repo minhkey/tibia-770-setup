@@ -35,4 +35,4 @@ echo "--------------------------------------------------------------------------
 echo ""
 
 sudo apt install -y r-base
-Rscript -e 'install.packages("stringi", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("stringi")'
