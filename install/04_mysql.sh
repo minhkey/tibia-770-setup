@@ -24,3 +24,6 @@ echo "delete from players;" | mysql -D$MYSQL_NAME -u$MYSQL_NAME -p$MYSQL_PASSWOR
 # run secure install
 # (requires user input)
 sudo mysql_secure_installation
+
+# clean up
+rm resources/otserv-schema.sql

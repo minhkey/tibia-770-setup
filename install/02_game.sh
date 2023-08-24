@@ -6,8 +6,6 @@ echo "Preparing game..."
 echo "---------------------------------------------------------------------------------------------"
 echo ""
 
-GAME_PATH="/home/game"
-
 # extract game
 sudo mkdir -p $GAME_PATH
 cd /home/$USER/tibia-770-setup

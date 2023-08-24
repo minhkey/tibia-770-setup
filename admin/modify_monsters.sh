@@ -1,12 +1,24 @@
-#!bin/bash
+#!/bin/bash
 
-cp -r /home/game/mon /home/game/mon.original
+read -e -p "Select experience rate: " EXP_RATE
+read -e -p "Select loot amount rate: " AMOUNT_RATE
+read -e -p "Select loot chance rate: " CHANCE_RATE
 
+cd /home/game/mon
+
+# start with experience
+for FILE in *.mon; do
+    echo "Changing experience level for: $FILE"
+    awk -v v1=$EXP_RATE '/Experience/ {$3=$3*v1} 1' "$FILE" > temp_file
+    mv temp_file "$FILE"
+done
+
+echo "Done!"
+
+# now loot rates
 for FILE in *mon; do
 
-    echo "------------------------------------------------------"
-    echo "Editing monster: $FILE"
-    echo "------------------------------------------------------"
+    echo "Changing loot rates for: $FILE"
 
     sed -n '/Inventory/,/^$/p' $FILE | tr -d "[:blank:]" | sed 's/Inventory={//g' | sed 's/}//g' | sed 's/(//g' | sed 's/)//g' > tmp.txt
 
@@ -14,7 +26,7 @@ for FILE in *mon; do
     if [ -s tmp.txt ]; then
 
         # replace loot data using R
-        Rscript --vanilla /home/$USER/tibia_770_setup/admin/change_loot.R 10 1
+        Rscript --vanilla /home/$USER/tibia_770_setup/admin/change_loot.R $AMOUNT_RATE $CHANCE_RATE
         
         # does outfile.txt exist (i.e., did the R script work)?
         if [ -e outfile.txt ]; then
@@ -40,19 +52,14 @@ for FILE in *mon; do
             mv temp_file "$FILE"
             rm outfile.txt
 
-            echo ""
-            echo "Done!"
-            echo ""
         else
-            echo ""
-            echo "Error: R script did not work, aborting..."
-            echo ""
+            echo "Error: R script did not work, skipping..."
         fi
     else
-        echo ""
-        echo "Monster: $FILE does not seem to give loot, skipping..."
-        echo ""
+        echo "Error: $FILE does not seem to give loot, skipping..."
     fi
 done
 
+echo "Done!"
 rm -f tmp.txt
+cd

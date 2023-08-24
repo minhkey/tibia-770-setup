@@ -27,3 +27,12 @@ echo ""
 sudo dpkg --add-architecture i386 
 sudo apt-get update 
 sudo apt-get install -y libstdc++5:i386
+
+echo ""
+echo "---------------------------------------------------------------------------------------------"
+echo "Installing R and R packages..."
+echo "---------------------------------------------------------------------------------------------"
+echo ""
+
+sudo apt install -y r-base
+Rscript -e 'install.packages("stringi", repos="https://cloud.r-project.org")'
