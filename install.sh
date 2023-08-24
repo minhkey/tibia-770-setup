@@ -6,7 +6,7 @@ echo "Creating MySQL credentials and setting necessary environment variables..."
 echo "---------------------------------------------------------------------------------------------"
 echo ""
 
-# create random MySQL credentials (25 characters for user/db name and 50 characters for password)
+# create random MySQL credentials
 TMP=$(< /dev/urandom tr -dc A-Za-z0-9 | head -c25); echo $(eval echo 'export MYSQL_NAME=$TMP' >> ~/.bashrc)
 TMP=$(< /dev/urandom tr -dc A-Za-z0-9 | head -c50); echo $(eval echo 'export MYSQL_PASSWORD=$TMP' >> ~/.bashrc)
 
@@ -14,8 +14,8 @@ TMP=$(< /dev/urandom tr -dc A-Za-z0-9 | head -c50); echo $(eval echo 'export MYS
 eval "$(cat ~/.bashrc | tail -n +10)"
 
 # "softcoded" variables, feel free to change
-MOTD="Welcome to Carlandia!"
-SERVER_NAME="Carlandia"
+MOTD="Welcome to Atlantis"
+SERVER_NAME="Atlantis"
 
 # "hardcoded" variables, do not change these!
 GAME_PATH="/home/game"
@@ -27,6 +27,7 @@ CORES=$(grep -Pc '^processor\t' /proc/cpuinfo)
 # create some extra directories
 cd /home/$USER/tibia-770-setup
 mkdir -p pids logs backup
+cd
 
 echo ""
 echo "---------------------------------------------------------------------------------------------"

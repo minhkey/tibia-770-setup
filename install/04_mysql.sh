@@ -11,6 +11,7 @@ sudo service mysql status | grep "active (running)" || echo "MySQL is not runnin
 sudo mysql -u root -p$MYSQL_PASSWORD -e "CREATE USER '$MYSQL_NAME'@'%' IDENTIFIED BY '$MYSQL_PASSWORD'; GRANT ALL PRIVILEGES ON *.* to '$MYSQL_NAME'@'%' WITH GRANT OPTION; CREATE DATABASE $MYSQL_NAME;"
 
 # load schema and fix IP
+cd /home/$USER/tibia-770-setup
 tar -xvzf resources/otserv-schema.tar.gz -C resources
 sudo mysql -u$MYSQL_NAME -p$MYSQL_PASSWORD $MYSQL_NAME < resources/otserv-schema.sql
 sudo sed -i "s/^bind-address.*/bind-address = $LOCAL_IP/g" /etc/mysql/mysql.conf.d/mysqld.cnf
@@ -23,6 +24,3 @@ echo "delete from players;" | mysql -D$MYSQL_NAME -u$MYSQL_NAME -p$MYSQL_PASSWOR
 # run secure install
 # (requires user input)
 sudo mysql_secure_installation
-
-# clean up
-rm resources/otserv-schema.sql

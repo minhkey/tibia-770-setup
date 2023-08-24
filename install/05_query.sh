@@ -6,6 +6,7 @@ echo "Preparing query manager..."
 echo "---------------------------------------------------------------------------------------------"
 echo ""
 
+cd
 git clone https://github.com/minhkey/realots-query-manager
 
 # fix IP
