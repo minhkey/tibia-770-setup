@@ -4,7 +4,6 @@ echo ""
 echo "---------------------------------------------------------------------------------------------"
 echo "Creating MySQL credentials and setting necessary environment variables..."
 echo "---------------------------------------------------------------------------------------------"
-echo ""
 
 # create random MySQL credentials
 TMP=$(< /dev/urandom tr -dc A-Za-z0-9 | head -c25); echo $(eval echo 'export MYSQL_NAME=$TMP' >> ~/.bashrc)
@@ -33,7 +32,6 @@ echo ""
 echo "---------------------------------------------------------------------------------------------"
 echo "Running through install scripts..."
 echo "---------------------------------------------------------------------------------------------"
-echo ""
 
 source /home/$USER/tibia-770-setup/install/01_dependencies.sh
 source /home/$USER/tibia-770-setup/install/02_game.sh
