@@ -3,7 +3,7 @@
 # "hardcoded" variables, do not change!
 GAME_PATH="/home/game"
 
-PS3="What do you want to do?"
+PS3="What do you want to do? "
 options=("Add user" "Add player" "Edit user" "Edit player" "Modify monsters" "Restore monsters" "Quit")
 
 select opt in "${options[@]}"

@@ -5,6 +5,7 @@ if ! service mysql status > /dev/null; then
     exit 1
 fi
 
+echo ""
 echo "---------------------------------------------------------------------------------------------"
 echo "Adding new user..."
 echo "---------------------------------------------------------------------------------------------"
@@ -34,7 +35,7 @@ if [[ ! $CONFIRM =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-mysql -u $MYSQL_NAME -p$MYSQL_PASSWORD $MYSQL_NAME -e "$MYSQL_COMMAND"
+mysql -u $MYSQL_NAME -p$MYSQL_PASSWORD _D $MYSQL_NAME -e "$MYSQL_COMMAND"
 
 echo ""
 echo "---------------------------------------------------------------------------------------------"
