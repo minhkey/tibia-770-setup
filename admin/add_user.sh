@@ -35,7 +35,7 @@ if [[ ! $CONFIRM =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-mysql -u $MYSQL_NAME -p$MYSQL_PASSWORD _D $MYSQL_NAME -e "$MYSQL_COMMAND"
+mysql -u $MYSQL_NAME -p$MYSQL_PASSWORD -D $MYSQL_NAME -e "$MYSQL_COMMAND"
 
 echo ""
 echo "---------------------------------------------------------------------------------------------"
