@@ -5,6 +5,12 @@ if ! service mysql status > /dev/null; then
     exit 1
 fi
 
+echo ""
+echo "---------------------------------------------------------------------------------------------"
+echo "Adding new house to player..."
+echo "---------------------------------------------------------------------------------------------"
+echo ""
+
 read -e -p "Enter house name (exactly as it says in-game, without quotes): " HOUSE_NAME
 read -e -p "Enter account ID: " ACCOUNT_ID
 read -e -p "Enter player ID: " PLAYER_ID
@@ -27,11 +33,8 @@ echo "Guests = {}" >> /home/game/dat/owners.dat
 echo "Subowners = {}" >> /home/game/dat/owners.dat
 echo "" >> /home/game/dat/owners.dat
 
-# create owner string
-#$OWNER_STRING="${PLAYER_NAME} owns this house."
-
 # insert into SQL table
-MYSQL_COMMAND="INSERT INTO \`houses\` (\`house_id\`, \`player_id\`, \`owner_string\`, \`worldname\`, \`guests\`, \`subowners\`) VALUES ($HOUSE_ID, $PLAYER_ID, '$PLAYER_NAME', '$WORLD_NAME', '', '');"
+MYSQL_COMMAND="INSERT INTO \`houses\` (\`house_id\`, \`player_id\`, \`player_name\`, \`worldname\`, \`guests\`, \`subowners\`) VALUES ($HOUSE_ID, $PLAYER_ID, '$OWNER_STRING', '$WORLD_NAME', '', '');"
 
 read -e -p "The following command will be executed on MySQL:
 

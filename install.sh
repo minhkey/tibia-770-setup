@@ -5,11 +5,11 @@ echo "--------------------------------------------------------------------------
 echo "Creating MySQL credentials and setting necessary environment variables..."
 echo "---------------------------------------------------------------------------------------------"
 
-# create random MySQL credentials
+# generate MySQL credentials
 TMP=$(< /dev/urandom tr -dc A-Za-z0-9 | head -c25); echo $(eval echo 'export MYSQL_NAME=$TMP' >> ~/.bashrc)
 TMP=$(< /dev/urandom tr -dc A-Za-z0-9 | head -c50); echo $(eval echo 'export MYSQL_PASSWORD=$TMP' >> ~/.bashrc)
 
-# trick to reload .bashrc so we can access environment variables
+# trick to reload .bashrc so we can access environment variables from within this script
 eval "$(cat ~/.bashrc | tail -n +10)"
 
 # "softcoded" variables, feel free to change

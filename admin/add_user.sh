@@ -5,13 +5,20 @@ if ! service mysql status > /dev/null; then
     exit 1
 fi
 
-read -e -p "Enter a unique user ID (e.g., 1001): " ID
-read -e -p "Enter a unique login number (e.g., 123456): " LOGIN
-read -e -p "Enter account email: " EMAIL
-read -s -e -p "Enter account password: " TMP
-PASSWORD=$(echo -n $TMP | openssl sha256 | awk '{print $2}')
-unset $TMP # just in case, we don't want this hanging around
+echo "---------------------------------------------------------------------------------------------"
+echo "Adding new user..."
+echo "---------------------------------------------------------------------------------------------"
 echo ""
+
+read -e -p "Enter a unique user ID (e.g., 1001): " ID
+read -e -p "Enter a unique account/login number (e.g., 123456): " LOGIN
+read -e -p "Enter e-mail: " EMAIL
+
+echo "Generating random password..."
+TMP=$(< /dev/urandom tr -dc A-Za-z0-9 | head -c25)
+echo "Hashing password..."
+PASSWORD=$(echo -n $TMP | openssl sha512 | awk '{print $2}')
+echo "Done!"
 read -e -p "Enter userlevel (0 = player, 1 = premium, 50 = tutor, 100 = gamemaster, 255 = god): " USERLEVEL
 
 MYSQL_COMMAND="INSERT INTO \`users\` (\`id\`, \`login\`, \`email\`, \`passwd\`, \`userlevel\`) VALUES ($ID, $LOGIN, '$EMAIL', '$PASSWORD', $USERLEVEL);"
@@ -29,6 +36,15 @@ fi
 
 mysql -u $MYSQL_NAME -p$MYSQL_PASSWORD $MYSQL_NAME -e "$MYSQL_COMMAND"
 
-
 echo ""
-echo "Done!"
+echo "---------------------------------------------------------------------------------------------"
+echo "Created a new user with the following data:"
+echo ""
+echo "User ID:              $ID"
+echo "Account/login number: $LOGIN"
+echo "E-mail:               $EMAIL"
+echo "Password:             $TMP"
+echo "Userlevel:            $USERLEVEL"
+echo "---------------------------------------------------------------------------------------------"
+
+unset $TMP

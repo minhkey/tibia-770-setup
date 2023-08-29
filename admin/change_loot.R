@@ -5,7 +5,7 @@ args <- commandArgs(trailingOnly = TRUE)
 
 change_exp <- function(amount_rate, chance_rate) {
 
-    tmp <- read.csv("/home/game/mon/tmp.txt", 
+    tmp <- read.csv("/home/game/mon/tmp.txt",
                     header = FALSE)
 
     # takes care of trailing commas

@@ -1,19 +1,27 @@
 #!/bin/bash
 
+echo ""
+echo "---------------------------------------------------------------------------------------------"
+echo "Modifying monsters..."
+echo "---------------------------------------------------------------------------------------------"
+echo ""
+
+GAMEPATH="/home/game"
+
 # restore original files first, so we start fresh
-cp -r /home/game/mon /home/game/mon.prev
-rm -rf /home/game/mon
-cp -r /home/game/mon.original /home/game/mon
+cp -r $GAMEPATH/mon $GAMEPATH/mon.prev
+rm -rf $GAMEPATH/mon
+cp -r $GAMEPATH/mon.original $GAMEPATH/mon
 
 read -e -p "Select experience rate: " EXP_RATE
 read -e -p "Select loot amount rate: " AMOUNT_RATE
 read -e -p "Select loot chance rate: " CHANCE_RATE
 
-cd /home/game/mon
+cd $GAMEPATH/mon
 
 # start with experience
 for FILE in *.mon; do
-    echo "Changing experience level for: $FILE"
+    echo "Setting experience rate to $EXP_RATE for $FILE"
     awk -v v1=$EXP_RATE '/Experience/ {$3=$3*v1} 1' "$FILE" > temp_file
     mv temp_file "$FILE"
 done
@@ -23,7 +31,7 @@ echo "Done!"
 # now loot rates
 for FILE in *mon; do
 
-    echo "Changing loot rates for: $FILE"
+    echo "Setting loot amount rate to $AMOUNT_RATE and chance rate to $CHANCE_RATE for $FILE"
 
     sed -n '/Inventory/,/^$/p' $FILE | tr -d "[:blank:]" | sed 's/Inventory={//g' | sed 's/}//g' | sed 's/(//g' | sed 's/)//g' > tmp.txt
 
@@ -32,26 +40,13 @@ for FILE in *mon; do
 
         # replace loot data using R
         Rscript --vanilla /home/$USER/tibia-770-setup/admin/change_loot.R $AMOUNT_RATE $CHANCE_RATE
-        
+
         # does outfile.txt exist (i.e., did the R script work)?
         if [ -e outfile.txt ]; then
 
             # replace relevant lines in .mon
             FIRST_LINE=$(sed -n '/^Inventory/{=;q;}' "$FILE")
-            NUM_LINES=$(sed -n '/Inventory/,/^$/p ' "$FILE" | wc -l)
-
-            echo $FIRST_LINE
-            echo $NUM_LINES
-
-            if [ "$NUM_LINES" -gt 2 ]; then
-                LAST_LINE=$(($FIRST_LINE+$NUM_LINES-2))
-            elif [ "$NUM_LINES" -eq 2 ]; then
-                LAST_LINE=$(($FIRST_LINE+$NUM_LINES))
-            else 
-                LAST_LINE=$(($FIRST_LINE))
-            fi
-
-            echo $LAST_LINE
+            LAST_LINE=$(sed -n $FIRST_LINE,\${/\}/\{=\;q}} "$FILE")
 
             sed -e "${FIRST_LINE}r outfile.txt" -e "${FIRST_LINE},${LAST_LINE}d" "$FILE" > temp_file
             mv temp_file "$FILE"
