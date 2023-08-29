@@ -11,12 +11,13 @@ echo "Editing user..."
 echo "---------------------------------------------------------------------------------------------"
 echo ""
 
+#"SELECT \`login\` FROM \`users\` WHERE \`id\`=$ID"
 read -e -p "Enter user ID to edit (e.g., 1001): " ID
 
-LOGIN=`mysql -u $MYSQL_NAME -p$MYSQL_PASSWORD -D $MYSQL_NAME -s -N "SELECT login FROM users WHERE id='$ID'"`
-EMAIL=`mysql -u $MYSQL_NAME -p$MYSQL_PASSWORD -D $MYSQL_NAME -s -N "SELECT email FROM users WHERE id='$ID'"`
-PASSWORD=`mysql -u $MYSQL_NAME -p$MYSQL_PASSWORD -D $MYSQL_NAME -s -N "SELECT password FROM users WHERE id='$ID'"`
-USERLEVEL=`mysql -u $MYSQL_NAME -p$MYSQL_PASSWORD -D $MYSQL_NAME -s -N "SELECT userlevel FROM users WHERE id='$ID'"`
+LOGIN=`mysql -u $MYSQL_NAME -p$MYSQL_PASSWORD -D $MYSQL_NAME -s -N "SELECT login FROM users WHERE id='$ID';"`
+EMAIL=`mysql -u $MYSQL_NAME -p$MYSQL_PASSWORD -D $MYSQL_NAME -s -N "SELECT email FROM users WHERE id='$ID';"`
+PASSWORD=`mysql -u $MYSQL_NAME -p$MYSQL_PASSWORD -D $MYSQL_NAME -s -N "SELECT password FROM users WHERE id='$ID';"`
+USERLEVEL=`mysql -u $MYSQL_NAME -p$MYSQL_PASSWORD -D $MYSQL_NAME -s -N "SELECT userlevel FROM users WHERE id='$ID';"`
 
 echo ""
 echo "User with ID $ID has the following data:"
