@@ -16,8 +16,8 @@ cd
 sleep 5
 
 echo "Starting game server..."
-nohup $GAME_PATH/bin/game > /home/$USER/tibia-770-setup/logs/game.log 2>&1 &
-echo $! > /home/$USER/tibia-770-setup/pids/game.pid
+$GAME_PATH/bin/game daemon
+cp $GAME_PATH/save/game.pid /home/$USER/tibia-770-setup/pids/game.pid
 sleep 5
 
 echo "Starting login server..."
