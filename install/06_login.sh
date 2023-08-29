@@ -16,7 +16,7 @@ cp realotsloginserver/build/tfls realotsloginserver
 
 # fix server name and motd
 sed -i "s/^serverName = .*/serverName = \"$SERVER_NAME\"/g" realotsloginserver/config.lua
-sed -i "s/name=\"RealOTS\"/name=\"$SERVER_NAME\"/g" realotsloginserver/gameservers.xml
+sed -i "s/name=\"RealOts\"/name=\"$SERVER_NAME\"/g" realotsloginserver/gameservers.xml
 sed -i "s/^motd = .*/motd = \"$MOTD\"/g" realotsloginserver/config.lua
 
 # fix IP

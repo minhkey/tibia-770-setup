@@ -41,5 +41,3 @@ do
         *) echo "Invalid option $REPLY";;
     esac
 done
-
-echo "Done!"
