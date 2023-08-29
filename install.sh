@@ -2,6 +2,20 @@
 
 echo ""
 echo "---------------------------------------------------------------------------------------------"
+echo "Checking OS compatibility..."
+echo "---------------------------------------------------------------------------------------------"
+echo ""
+
+OS_NAME=$(lsb_release -si)
+OS_VERSION=$(lsb_release -sr)
+
+if [[ $OS_NAME != "Ubuntu" ]] || [[ $OS_VERSION != "22.04" ]] ; then
+    echo "It looks like you are running $OS_NAME $OS_VERSION. You need to be running Ubuntu 20.04 for this script to work. Aborting..."
+    exit
+fi
+
+echo ""
+echo "---------------------------------------------------------------------------------------------"
 echo "Creating MySQL credentials and setting necessary environment variables..."
 echo "---------------------------------------------------------------------------------------------"
 
