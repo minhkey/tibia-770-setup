@@ -14,7 +14,7 @@ echo ""
 read -e -p "Enter house name (exactly as it says in-game, without quotes): " HOUSE_NAME
 read -e -p "Enter account ID: " ACCOUNT_ID
 read -e -p "Enter player ID: " PLAYER_ID
-read -e -p "Enter player name: " PLAYER_NAME 
+read -e -p "Enter player name: " OWNER_STRING 
 read -e -p "Enter world name: " WORLD_NAME
 
 # get house ID
