@@ -13,7 +13,7 @@ echo ""
 
 read -e -p "Enter house name (exactly as it says in-game, without quotes): " HOUSE_NAME
 read -e -p "Enter account ID: " ACCOUNT_ID
-read -e -p "Enter player ID: " PLAYER_ID
+#read -e -p "Enter player ID: " PLAYER_ID
 read -e -p "Enter player name: " OWNER_STRING 
 read -e -p "Enter world name: " WORLD_NAME
 
@@ -22,7 +22,7 @@ HOUSE_ID=$(cat /home/game/dat/houses.dat | grep -B1 "$HOUSE_NAME" | grep "ID" | 
 
 # UNIX times
 YESTERDAY_UNIX=$(date --date="yesterday" +"%s")
-FUTURE_UNIX=1900000000
+FUTURE_UNIX=1986648007
 
 # insert data into owners.dat
 echo "ID = $HOUSE_ID" >> /home/game/dat/owners.dat
@@ -34,7 +34,7 @@ echo "Subowners = {}" >> /home/game/dat/owners.dat
 echo "" >> /home/game/dat/owners.dat
 
 # insert into SQL table
-MYSQL_COMMAND="INSERT INTO \`houses\` (\`house_id\`, \`player_id\`, \`owner_string\`, \`worldname\`, \`guests\`, \`subowners\`) VALUES ($HOUSE_ID, $PLAYER_ID, '$OWNER_STRING', '$WORLD_NAME', '', '');"
+MYSQL_COMMAND="INSERT INTO \`houses\` (\`house_id\`, \`player_id\`, \`owner_string\`, \`worldname\`, \`guests\`, \`subowners\`) VALUES ($HOUSE_ID, $ACCOUNT_ID, '$OWNER_STRING', '$WORLD_NAME', '', '');"
 
 read -e -p "The following command will be executed on MySQL:
 
