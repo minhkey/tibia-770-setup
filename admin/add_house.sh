@@ -34,7 +34,7 @@ echo "Subowners = {}" >> /home/game/dat/owners.dat
 echo "" >> /home/game/dat/owners.dat
 
 # insert into SQL table
-MYSQL_COMMAND="INSERT INTO \`houses\` (\`house_id\`, \`player_id\`, \`player_name\`, \`worldname\`, \`guests\`, \`subowners\`) VALUES ($HOUSE_ID, $PLAYER_ID, '$OWNER_STRING', '$WORLD_NAME', '', '');"
+MYSQL_COMMAND="INSERT INTO \`houses\` (\`house_id\`, \`player_id\`, \`owner_string\`, \`worldname\`, \`guests\`, \`subowners\`) VALUES ($HOUSE_ID, $PLAYER_ID, '$OWNER_STRING', '$WORLD_NAME', '', '');"
 
 read -e -p "The following command will be executed on MySQL:
 

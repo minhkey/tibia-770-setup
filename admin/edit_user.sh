@@ -16,7 +16,7 @@ read -e -p "Enter user ID to edit (e.g., 1001): " ID
 
 LOGIN=`mysql -u $MYSQL_NAME -p$MYSQL_PASSWORD -D $MYSQL_NAME -s -N -e "SELECT login FROM users WHERE id='$ID'"`
 EMAIL=`mysql -u $MYSQL_NAME -p$MYSQL_PASSWORD -D $MYSQL_NAME -s -N -e "SELECT email FROM users WHERE id='$ID'"`
-PASSWORD=`mysql -u $MYSQL_NAME -p$MYSQL_PASSWORD -D $MYSQL_NAME -s -N -e "SELECT password FROM users WHERE id='$ID'"`
+PASSWORD=`mysql -u $MYSQL_NAME -p$MYSQL_PASSWORD -D $MYSQL_NAME -s -N -e "SELECT passwd FROM users WHERE id='$ID'"`
 USERLEVEL=`mysql -u $MYSQL_NAME -p$MYSQL_PASSWORD -D $MYSQL_NAME -s -N -e "SELECT userlevel FROM users WHERE id='$ID'"`
 
 echo ""
@@ -28,7 +28,7 @@ echo "Password (hashed):    $PASSWORD"
 echo "Userlevel:            $USERLEVEL"
 echo ""
 
-PS3="What do you want to edit?"
+PS3="What do you want to edit? "
 options=("Account/login number" "E-mail" "Password" "Userlevel" "Quit")
 
 select opt in "${options[@]}"
