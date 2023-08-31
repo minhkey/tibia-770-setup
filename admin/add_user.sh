@@ -15,11 +15,13 @@ read -e -p "Enter a unique user ID (e.g., 1001): " ID
 read -e -p "Enter a unique account/login number (e.g., 123456): " LOGIN
 read -e -p "Enter e-mail: " EMAIL
 
+# automatically generate a random 25 character password and hash using SHA-512
 echo "Generating random password..."
 TMP=$(< /dev/urandom tr -dc A-Za-z0-9 | head -c25)
 echo "Hashing password..."
 PASSWORD=$(echo -n $TMP | openssl sha512 | awk '{print $2}')
 echo "Done!"
+
 read -e -p "Enter userlevel (0 = player, 1 = premium, 50 = tutor, 100 = gamemaster, 255 = god): " USERLEVEL
 
 MYSQL_COMMAND="INSERT INTO \`users\` (\`id\`, \`login\`, \`email\`, \`passwd\`, \`userlevel\`) VALUES ($ID, $LOGIN, '$EMAIL', '$PASSWORD', $USERLEVEL);"
@@ -46,6 +48,8 @@ echo "Account/login number: $LOGIN"
 echo "E-mail:               $EMAIL"
 echo "Password:             $TMP"
 echo "Userlevel:            $USERLEVEL"
+echo ""
+echo "DO NOT FORGET TO WRITE DOWN THE PASSWORD!"
 echo "---------------------------------------------------------------------------------------------"
 
 unset $TMP
