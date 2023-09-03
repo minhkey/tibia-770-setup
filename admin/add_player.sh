@@ -11,9 +11,9 @@ echo "Adding new player..."
 echo "---------------------------------------------------------------------------------------------"
 echo ""
 
-read -e -p "Enter a unique player ID (e.g., 1001; note, this is used in 'houses' table): " PLAYER_ID
-read -e -p "Enter a unique account ID (e.g., 112233; note, this is used in 'owners.dat'): " ACCOUNT_ID
-read -e -p "Enter account number (e.g., 123456; must correspond to 'login' in 'users' table): " ACCOUNT_NUMBER
+read -e -p "Enter a unique player ID (e.g., 1001): " PLAYER_ID
+read -e -p "Enter a unique account ID (e.g., 100001): " ACCOUNT_ID
+read -e -p "Enter account/login number (same as the user): " ACCOUNT_NUMBER
 read -e -p "Enter the name of the new char: " CHAR_NAME
 read -e -p "Enter gender, 0 = female or 1 = male: " GENDER
 
@@ -42,6 +42,4 @@ echo "Account/login number: $ACCOUNT_NUMBER"
 echo "Name:                 $CHAR_NAME"
 echo "Gender:               $GENDER"
 echo ""
-echo "Note that the account number ($ACCOUNT_NUMBER)"
-echo "corresponds login number in 'users' table"
 echo "---------------------------------------------------------------------------------------------"

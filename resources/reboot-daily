@@ -1,0 +1,93 @@
+#!/bin/bash
+
+# wichtige Variablen
+BASE="/home/game"
+WORLDLINE=`egrep "^ *(World|world|WORLD) *[=] *" $BASE/.tibia `
+WORLD=`expr "$WORLDLINE" : " *[a-zA-Z]* *[=] * [\"]*\([a-zA-Z]*\)[\"]*" | tr A-Z a-z`
+PATCH="$BASE/bin/patch"
+MAILBODY=`mktemp reboot-daily.$HOSTNAME.XXXXXX `
+MAILADDRESS="cipwatch@cipsoft.com"
+
+# Dieses Script fuehrt den taeglichen Reboot durch.
+# Es wird ein AutoPatch durchgefuehrt
+# Dabei werden Karte und Spielerdaten gesichert,
+# Danach faehrt der Game-Server automatisch wieder hoch.
+
+# Fehler Funktionen: treten Fehler auf, so wird das reboot daily script 
+# angehalten, und eine email an cipwatch@cipsoft.com verschickt
+
+function check_for_error ()
+# $1 last return value (0 == ok)
+# $2 error message
+# $3 1 => do not abort!
+{
+  test $1 -eq 0 && return
+  echo -en "$2\n" >> $MAILBODY
+  test -n "$3" && test $3 -eq 1 && return
+  echo -en "Fatal errors encountered. Stopping reboot-daily!\n" >> $MAILBODY
+  exit 1
+}
+
+function cleanup()
+{ 
+  test -s $MAILBODY && cat $MAILBODY | mail -s "reboot-daily error at $USER@$HOSTNAME ($WORLD)" $MAILADDRESS
+  rm -f $MAILBODY
+}
+
+trap 'cleanup' EXIT INT TERM QUIT
+
+# Verzeichnis korrigieren
+cd $BASE
+
+# wurde der parameter gesetzt (weltname)
+if test -z "$WORLD" ; then
+  check_for_error 1 "no worldname found"
+fi
+
+# Autopatch
+if test -d patch && ls patch/* >/dev/null 2>&1 ; then 
+  $PATCH -d patch/* >>$MAILBODY 2>&1
+  RETVAL=$?
+  rmdir --ignore-fail-on-non-empty patch
+  check_for_error $RETVAL "autopatch: autopatch failed"
+fi
+
+# Neues game binary
+if test -x bin/game.new ; then
+  rm -f bin/game.old
+  mv -f bin/game bin/game.old
+  mv -f bin/game.new bin/game
+  echo -en "Using now a new game binary.\n" >> $MAILBODY
+fi
+
+# Zusatz Skript (muss 0 zurueckliefern!!)
+if test -x $BASE/reboot.sh ; then
+  $BASE/reboot.sh >>$MAILBODY 2>&1
+  RETVAL=$?
+  check_for_error $RETVAL "reboot.sh returned $RETVAL"
+  rm -f reboot.sh
+fi
+
+# Backup ausfuehren
+# delete backups older than one week
+find /home/$USER/tibia-770-setup/ -type f -mtime +7 -name '*.gz' -execdir rm -- '{}' \;
+
+cd /home/$USER/tibia-770-setup/backups
+TODAY=$(date +%Y-%m-%d)
+
+# database
+mysqldump -u $MYSQL_NAME -p$MYSQL_PASSWORD -A -R -E --triggers --single-transaction | gzip > database-$TODAY.sql.gz
+
+ # game files, .bashrc
+/bin/tar -cvpzf backup-$TODAY.tar.gz /home/game /home/$USER/.bashrc
+
+cd $BASE
+check_for_error $? "daily backup failed"
+
+# Hochfahren des Game-Servers
+if test -e $BASE/no-reboot ; then
+  rm -f $BASE/no-reboot
+  exit 0
+fi
+$BASE/bin/game daemon
+check_for_error $? "game: restart of game server failed"

@@ -24,9 +24,9 @@ sudo sed -i "s/World = \"Zanera\"/World = \"$SERVER_NAME\"/g" $GAME_PATH/.tibia
 sudo sed -i "s/QueryManager = {.*}/QueryManager = {(\"${LOCAL_IP}\",${PORT},\"nXE?\/>j\`\"),(\"${LOCAL_IP}\",${PORT},\"nXE?\/>j\`\"),(\"${LOCAL_IP}\",${PORT},\"nXE?\/>j\`\"),(\"${LOCAL_IP}\",${PORT},\"nXE?\/>j\`\")}/g" $GAME_PATH/.tibia
 cp $GAME_PATH/.tibia /home/$USER/.tibia
 
-# fix rebooting
-sudo sed -i 'sX#!/bin/shX#!/bin/bashXg' $GAME_PATH/bin/reboot-daily
-sudo sed -i 'sXBASE="/game"XBASE="/home/game"Xg' $GAME_PATH/bin/reboot-daily
+# custom reboot-daily
+sudo mv /home/$USER/tibia-770-setup/resources/reboot-daily $GAME_PATH/bin/reboot-daily
+sudo chmod +x $GAME_PATH/bin/reboot-daily
 
 # extract necessary libraries
 tar -xvzf resources/dennis-libraries.tar.gz -C resources

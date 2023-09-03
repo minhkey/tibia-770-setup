@@ -39,7 +39,7 @@ CORES=$(grep -Pc '^processor\t' /proc/cpuinfo)
 
 # create some extra directories
 cd /home/$USER/tibia-770-setup
-mkdir -p pids logs backup
+mkdir -p pids logs backups
 cd
 
 echo "---------------------------------------------------------------------------------------------"
