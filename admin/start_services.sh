@@ -17,7 +17,6 @@ sleep 5
 
 echo "Starting game server..."
 $GAME_PATH/bin/game daemon
-cp $GAME_PATH/save/game.pid /home/$USER/tibia-770-setup/pids/game.pid
 sleep 5
 
 echo "Starting login server..."
