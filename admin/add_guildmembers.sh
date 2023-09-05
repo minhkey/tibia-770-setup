@@ -11,7 +11,7 @@ echo "Adding member to guild..."
 echo "---------------------------------------------------------------------------------------------"
 echo ""
 
-read -e -p "Enter a unique entry ID (e.g., 1001): " ENTRY_ID
+read -e -p "Enter a unique entry ID (e.g., 1: " ENTRY_ID
 read -e -p "Enter player account ID (e.g., 100001): " ACCOUNT_ID
 read -e -p "Enter guild ID (e.g., 10001): " GUILD_ID
 read -e -p "Enter guild rank name: " GUILD_TITLE
@@ -19,7 +19,7 @@ read -e -p "Enter numerical rank (1-3, should correspond to rank name): " RANK
 
 TIMESTAMP=$(date --date="yesterday" +"%s")
 
-MYSQL_COMMAND="INSERT INTO \`guild_members\` (\`entry_id\`, \`account_id\`, \`guild_id\`, \`guild_title\`, \`timestamp\`, \`rank\`) VALUES ($ENTRY_ID, $ACCOUNT_ID, $GUILD_ID, '$GUILD_TITLE', $TIMESTAMP, $RANK);"
+MYSQL_COMMAND="INSERT INTO \`guild_members\` (\`entry_id\`, \`account_id\`, \`guild_id\`, \`guild_title\`, \`timestamp\`, \`guildrank\`) VALUES ($ENTRY_ID, $ACCOUNT_ID, $GUILD_ID, '$GUILD_TITLE', $TIMESTAMP, $RANK);"
 
 read -e -p "The following query will be executed on MySQL:
 
