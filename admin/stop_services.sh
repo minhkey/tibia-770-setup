@@ -4,6 +4,11 @@
 
 GAME_PATH=/home/game
 
+cd $GAME_PATH/bin
+./gsc broadcast "Server is going down for maintenance and upgrades! Please move to a safe area immediately!"
+sleep 10
+cd
+
 echo "Stopping login server..."
 PID=$(cat /home/$USER/tibia-770-setup/pids/login.pid)
 kill -SIGTERM $PID
