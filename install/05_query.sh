@@ -6,6 +6,11 @@ echo "Preparing query manager..."
 echo "---------------------------------------------------------------------------------------------"
 echo ""
 
+SERVER_NAME="Atlantis"
+LOCAL_IP=$(hostname -I | cut -d' ' -f1)
+IFS='.' read -ra LOCAL_IP_PARTS <<< "$LOCAL_IP"
+CORES=$(grep -Pc '^processor\t' /proc/cpuinfo)
+
 cd
 git clone https://github.com/minhkey/realots-query-manager
 
