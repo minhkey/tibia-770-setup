@@ -4,7 +4,7 @@
 GAME_PATH="/home/game"
 
 PS3="What do you want to do? "
-options=("Add user" "Add player" "Add house" "Edit user" "Edit player" "Modify monsters" "Restore monsters" "Quit")
+options=("Add user" "Add player" "Add house" "Create guild" "Add guildmember" "Edit user" "Edit player" "Modify monsters" "Restore monsters" "Quit")
 
 select opt in "${options[@]}"
 do
@@ -19,6 +19,14 @@ do
             ;;
         "Add house")
             source /home/$USER/tibia-770-setup/admin/add_house.sh
+            break
+            ;;
+        "Create guild")
+            source /home/$USER/tibia-770-setup/admin/create_guild.sh
+            break
+            ;;
+        "Add guildmember")
+            source /home/$USER/tibia-770-setup/admin/add_guildmember.sh
             break
             ;;
         "Edit user")

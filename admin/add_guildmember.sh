@@ -15,7 +15,7 @@ read -e -p "Enter a unique entry ID (e.g., 1): " ENTRY_ID
 read -e -p "Enter player account ID (e.g., 100001): " ACCOUNT_ID
 read -e -p "Enter guild ID (e.g., 1): " GUILD_ID
 read -e -p "Enter guild rank name: " GUILD_TITLE
-read -e -p "Enter numerical rank (1-3, should correspond to rank name): " RANK
+read -e -p "Enter numerical rank (should correspond to rank name): " RANK
 
 TIMESTAMP=$(date --date="yesterday" +"%s")
 
@@ -41,6 +41,6 @@ echo ""
 echo "Guild ID:            $GUILD_ID"
 echo "Entry ID:            $ENTRY_ID"
 echo "Guild rank name:     $GUILD_TITLE"
-echo "Guild rank:          $RANK"
+echo "Guild rank number:   $RANK"
 echo ""
 echo "---------------------------------------------------------------------------------------------"
