@@ -11,9 +11,9 @@ echo "Adding member to guild..."
 echo "---------------------------------------------------------------------------------------------"
 echo ""
 
-read -e -p "Enter a unique entry ID (e.g., 1: " ENTRY_ID
+read -e -p "Enter a unique entry ID (e.g., 1): " ENTRY_ID
 read -e -p "Enter player account ID (e.g., 100001): " ACCOUNT_ID
-read -e -p "Enter guild ID (e.g., 10001): " GUILD_ID
+read -e -p "Enter guild ID (e.g., 1): " GUILD_ID
 read -e -p "Enter guild rank name: " GUILD_TITLE
 read -e -p "Enter numerical rank (1-3, should correspond to rank name): " RANK
 
