@@ -81,6 +81,10 @@ mysqldump -u $MYSQL_NAME -p$MYSQL_PASSWORD -A -R -E --triggers --single-transact
  # game files, .bashrc
 /bin/tar -cvpzf backup-$TODAY.tar.gz /home/game /home/$USER/.bashrc
 
+# remove today's game log
+rm /home/game/log/game.log
+touch /home/game/log/game.log
+
 cd $BASE
 check_for_error $? "daily backup failed"
 
