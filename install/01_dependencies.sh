@@ -12,7 +12,7 @@ sudo apt install -y \
     build-essential cmake g++ curl wget unrar git apt-transport-https ufw \
     fail2ban ranger htop \
     lib32z1 libpugixml-dev \
-    apache2 mysql-server libmysqlclient-dev \
+    apache2 mysql-server libmysqlclient-dev php libapache2-mod-php php-mysql \
     libgmp-dev libgmp3-dev libmpfr-dev \
     libboost-all-dev libboost-system-dev libboost-thread-dev libboost-program-options-dev libboost-test-dev libboost-filesystem-dev \
     lua5.1 libluajit-5.1-dev liblua5.1-0-dev
@@ -39,7 +39,9 @@ sudo apt install -y r-base libssl-dev libcurl4-openssl-dev unixodbc-dev libxml2-
     libpng-dev libtiff5-dev libjpeg-dev
 
 wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.3.450/quarto-1.3.450-linux-amd64.deb
-sudo apt install -y quarto-1.3.450-linux-amd64.deb
+sudo apt install -y ./quarto-1.3.450-linux-amd64.deb
 rm quarto-1.3.450-linux-amd64.deb
 
-Rscript -e 'install.packages(c("stringi", "here", "tidyverse", "DT", "RMySQL", "DBI"))'
+Rscript -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE)'
+Rscript -e '.libPaths(Sys.getenv("R_LIBS_USER"))'
+Rscript -e 'options(Ncpus = 2); install.packages(c("stringi", "here", "tidyverse", "DT", "RMySQL", "DBI"))'

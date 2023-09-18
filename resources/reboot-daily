@@ -70,9 +70,9 @@ fi
 
 # Backup ausfuehren
 # delete backups older than one week
-find /home/$USER/tibia-770-setup/ -type f -mtime +7 -name '*.gz' -execdir rm -- '{}' \;
+find /home/$USER/backup -type f -mtime +7 -name '*.gz' -execdir rm -- '{}' \;
 
-cd /home/$USER/tibia-770-setup/backups
+cd /home/$USER/backup
 TODAY=$(date +%Y-%m-%d)
 
 # database
@@ -81,9 +81,13 @@ mysqldump -u $MYSQL_NAME -p$MYSQL_PASSWORD -A -R -E --triggers --single-transact
  # game files, .bashrc
 /bin/tar -cvpzf backup-$TODAY.tar.gz /home/game /home/$USER/.bashrc
 
-# remove today's game log
-rm /home/game/log/game.log
-touch /home/game/log/game.log
+# backup and remove today's game log
+cp $BASE/log/game.log /home/$USER/backup/
+rm $BASE/log/game.log
+touch $BASE/log/game.log
+
+# give daily present
+source /home/$USER/tibia-770-setup/admin/give_present.sh
 
 cd $BASE
 check_for_error $? "daily backup failed"

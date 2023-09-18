@@ -29,7 +29,7 @@ done
 echo "Done!"
 
 # now loot rates
-for FILE in *mon; do
+for FILE in *.mon; do
 
     echo "Setting loot amount rate to $AMOUNT_RATE and chance rate to $CHANCE_RATE for $FILE"
 

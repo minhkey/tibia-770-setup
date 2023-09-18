@@ -2,20 +2,6 @@
 
 echo ""
 echo "---------------------------------------------------------------------------------------------"
-echo "Checking OS compatibility..."
-echo "---------------------------------------------------------------------------------------------"
-echo ""
-
-OS_NAME=$(lsb_release -si)
-OS_VERSION=$(lsb_release -sr)
-
-if [[ $OS_NAME != "Ubuntu" ]] || [[ $OS_VERSION != "22.04" ]] ; then
-    echo "It looks like you are running $OS_NAME $OS_VERSION. You need to be running Ubuntu 20.04 for this script to work. Aborting..."
-    exit
-fi
-
-echo ""
-echo "---------------------------------------------------------------------------------------------"
 echo "Creating MySQL credentials and setting necessary environment variables..."
 echo "---------------------------------------------------------------------------------------------"
 
@@ -29,6 +15,7 @@ eval "$(cat ~/.bashrc | tail -n +10)"
 # "softcoded" variables, feel free to change
 MOTD="Welcome to Atlantis"
 SERVER_NAME="Atlantis"
+SERVER_NAME_SMALL="atlantis"
 
 # "hardcoded" variables, do not change these!
 GAME_PATH="/home/game"
@@ -38,9 +25,10 @@ IFS='.' read -ra LOCAL_IP_PARTS <<< "$LOCAL_IP"
 CORES=$(grep -Pc '^processor\t' /proc/cpuinfo)
 
 # create some extra directories
-cd /home/$USER/tibia-770-setup
-mkdir -p pids logs backups
-cd
+mkdir -p /home/$USER/tibia-770-setup/pids
+mkdir -p /home/$USER/tibia-770-setup/logs
+mkdir -p /home/$USER/backup
+mkdir -p /home/$USER/data
 
 echo "---------------------------------------------------------------------------------------------"
 echo "Running through install scripts..."
