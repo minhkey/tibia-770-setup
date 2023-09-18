@@ -25,7 +25,7 @@ sudo sed -i "s/QueryManager = {.*}/QueryManager = {(\"${LOCAL_IP}\",${PORT},\"nX
 cp $GAME_PATH/.tibia /home/$USER/.tibia
 
 # custom reboot-daily
-sudo mv /home/$USER/tibia-770-setup/resources/reboot-daily $GAME_PATH/bin/reboot-daily
+sudo mv /home/$USER/tibia-770-setup/resources/scripts/reboot-daily $GAME_PATH/bin/reboot-daily
 sudo chmod +x $GAME_PATH/bin/reboot-daily
 
 # extract necessary libraries

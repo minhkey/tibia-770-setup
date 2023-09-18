@@ -30,17 +30,13 @@ sudo apt-get install -y libstdc++5:i386
 
 echo ""
 echo "---------------------------------------------------------------------------------------------"
-echo "Installing R, R packages and Quarto..."
+echo "Installing R and R packages"
 echo "---------------------------------------------------------------------------------------------"
 echo ""
 
 sudo apt install -y r-base libssl-dev libcurl4-openssl-dev unixodbc-dev libxml2-dev \
     libmariadb-dev libfontconfig1-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev \
     libpng-dev libtiff5-dev libjpeg-dev
-
-wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.3.450/quarto-1.3.450-linux-amd64.deb
-sudo apt install -y ./quarto-1.3.450-linux-amd64.deb
-rm quarto-1.3.450-linux-amd64.deb
 
 Rscript -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE)'
 Rscript -e '.libPaths(Sys.getenv("R_LIBS_USER"))'

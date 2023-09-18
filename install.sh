@@ -30,6 +30,12 @@ mkdir -p /home/$USER/tibia-770-setup/logs
 mkdir -p /home/$USER/backup
 mkdir -p /home/$USER/data
 
+# necessary for website
+sudo mkdir -p /scripts
+sudo chown -R www-data:www-data /scripts
+sudo chmod 755 /scripts
+sudo chmod +x /scripts
+
 echo "---------------------------------------------------------------------------------------------"
 echo "Running through install scripts..."
 echo "---------------------------------------------------------------------------------------------"
