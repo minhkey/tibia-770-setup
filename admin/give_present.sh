@@ -1,6 +1,6 @@
 #!/bin/bash
 
-present="10 Content={2856 Content={3160 Charges=99, 3155 Charges=99, 3191 Charges=99, 3200 Charges=99, 3198 Charges=99}}"
+present="10 Content={2856 Content={3160 Charges=99, 3155 Charges=99, 3191 Charges=99, 3200 Charges=99, 3198 Charges=99}}}"
 
 cd /home/game/usr
 
