@@ -82,7 +82,7 @@ mysqldump -u $MYSQL_NAME -p$MYSQL_PASSWORD -A -R -E --triggers --single-transact
 /bin/tar -cvpzf backup-$TODAY.tar.gz /home/game /home/$USER/.bashrc
 
 # backup and remove today's game log
-cp $BASE/log/game.log /home/$USER/backup/
+cp $BASE/log/game.log /home/$USER/backup/gamelog-$TODAY.log
 rm $BASE/log/game.log
 touch $BASE/log/game.log
 

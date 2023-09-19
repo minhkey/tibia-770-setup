@@ -32,9 +32,11 @@ mkdir -p /home/$USER/data
 
 # necessary for website
 sudo mkdir -p /scripts
+sudo mkdir -p /data
 sudo chown -R www-data:www-data /scripts
+sudo chown -R $USER:$USER /data
 sudo chmod 755 /scripts
-sudo chmod +x /scripts
+sudo chmod 755 /data
 
 echo "---------------------------------------------------------------------------------------------"
 echo "Running through install scripts..."

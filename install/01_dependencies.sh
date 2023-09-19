@@ -40,4 +40,4 @@ sudo apt install -y r-base libssl-dev libcurl4-openssl-dev unixodbc-dev libxml2-
 
 Rscript -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE)'
 Rscript -e '.libPaths(Sys.getenv("R_LIBS_USER"))'
-Rscript -e 'options(Ncpus = 2); install.packages(c("stringi", "here", "tidyverse", "DT", "RMySQL", "DBI"))'
+Rscript -e 'options(Ncpus = 2); install.packages(c("stringi", "here", "tidyverse", "DT", "RMySQL", "DBI", "htmlwidgets"))'
